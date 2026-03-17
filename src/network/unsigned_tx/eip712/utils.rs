@@ -28,7 +28,7 @@ pub enum BytecodeHashError {
 /// - The bytecode length must not exceed the maximum allowed value.
 /// - The number of words must be odd.
 pub fn hash_bytecode(bytecode: &[u8]) -> Result<[u8; 32], BytecodeHashError> {
-    if bytecode.len() % WORD_SIZE != 0 {
+    if !bytecode.len().is_multiple_of(WORD_SIZE) {
         return Err(BytecodeHashError::BytecodeNotAligned);
     }
 

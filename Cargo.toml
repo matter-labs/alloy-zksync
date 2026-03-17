@@ -1,6 +1,6 @@
 [package]
 name = "alloy-zksync"
-version = "1.0.7-alpha.1"
+version = "1.0.7-alpha.2"
 edition = "2024"
 authors = ["Igor Aleksanov <popzxc@yandex.ru>"]
 license = "MIT OR Apache-2.0"
