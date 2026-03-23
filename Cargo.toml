@@ -1,16 +1,13 @@
 [package]
 name = "alloy-zksync"
-version = "1.0.7-alpha.2"
+version = "1.7.3-alpha.1"
 edition = "2024"
 authors = ["Igor Aleksanov <popzxc@yandex.ru>"]
 license = "MIT OR Apache-2.0"
 description = "ZKsync network implementation for alloy"
 
 [dependencies]
-# Keep alloy within the 1.0.x series so the crate remains compatible with the
-# repository's Rust 1.88 MSRV in CI while still requiring the advisory-free API
-# surface that this crate now targets.
-alloy = { version = ">=1.0.42, <1.1", default-features = false, features = [
+alloy = { version = "1.7.3", default-features = false, features = [
   "rlp",
   "serde",              # TODO: Make optional along with other `serde` dependencies
   "rpc-types",
