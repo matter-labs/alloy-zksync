@@ -426,6 +426,8 @@ mod tests {
     use super::*;
     use alloy::providers::{Provider, ProviderBuilder};
 
+    const FORK_STARTUP_TIMEOUT_MILLIS: u64 = 60_000;
+
     #[test]
     fn can_launch_anvil_zksync() {
         let _ = AnvilZKsync::new().spawn();
@@ -469,7 +471,10 @@ mod tests {
     #[tokio::test(flavor = "multi_thread")]
     #[ignore]
     async fn fork_initializes_correct_chain() {
-        let anvil_zksync = AnvilZKsync::new().fork("mainnet").spawn();
+        let anvil_zksync = AnvilZKsync::new()
+            .fork("mainnet")
+            .timeout(FORK_STARTUP_TIMEOUT_MILLIS)
+            .spawn();
         let rpc_url = anvil_zksync.endpoint_url();
         let provider = ProviderBuilder::new().connect_http(rpc_url);
 
@@ -487,6 +492,7 @@ mod tests {
         let anvil_zksync = AnvilZKsync::new()
             .fork("mainnet")
             .fork_block_number(fork_block_number)
+            .timeout(FORK_STARTUP_TIMEOUT_MILLIS)
             .spawn();
 
         let rpc_url = anvil_zksync.endpoint_url();
